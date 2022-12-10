@@ -9,7 +9,7 @@
       $table="";
       foreach (json_decode($articulos) as $value) {
         $table.="<tr>";
-        $table.=" <th>".$value->id."</th>";
+        $table.=" <td>".$value->id."</td>";
         $table.=" <td>".$value->type."</td>";
         $table.=" <td>".$value->color."</td>";
         $table.="</tr>";
@@ -36,10 +36,10 @@
         <div class="form-group">
           <select class="custom-select" name="color" required>
             <option value="">Selecciona un color</option>
-            <option value="red">Red</option>
-            <option value="green" Selected>Green</option>
-            <option value="blue">Blue</option>
-            <option value="brown">Brown</option>
+            <option value="red" <?php echo (isset($_GET['color']) && $_GET['color'] == "red") ? 'Selected' : '';?>>Red</option>
+            <option value="green" <?php echo ((isset($_GET['color']) && $_GET['color'] == "green") || !isset($_GET['color'])) ? 'Selected' : '';?>>Green</option>
+            <option value="blue" <?php echo (isset($_GET['color']) && $_GET['color'] == "blue") ? 'Selected' : '';?>>Blue</option>
+            <option value="brown" <?php echo (isset($_GET['color']) && $_GET['color'] == "brown") ? 'Selected' : '';?>>Brown</option>
           </select>
           <div class="invalid-feedback">Debes elegir un color</div>
         </div>
