@@ -1,10 +1,11 @@
 <?php
     include("controlador/mainController.php");
-
-    if(isset($_GET['getData'])){
+   
+    if(isset($_GET['color'])){
       $cont  = new mainController();
-      $articulos= $cont->getData();
-      
+      $articulos= $cont->getData($_GET['color']);
+      $cont->setFile($articulos);
+
       $table="";
       foreach (json_decode($articulos) as $value) {
         $table.="<tr>";
@@ -32,12 +33,21 @@
 
     <form class="was-validated form-style"  method="get">
       <div class="clo-lg-6 col-md-6 mb-6">
-        <input type="hidden" name="getData">
-        <button class="btn btn-primary float-right" name="datos" type="submit">Generar datos</button>
+        <div class="form-group">
+          <select class="custom-select" name="color" required>
+            <option value="">Selecciona un color</option>
+            <option value="red">Red</option>
+            <option value="green" Selected>Green</option>
+            <option value="blue">Blue</option>
+            <option value="brown">Brown</option>
+          </select>
+          <div class="invalid-feedback">Debes elegir un color</div>
+        </div>
+        <button class="btn btn-primary float-right" type="submit">Generar datos</button>
       </div>
     </form>
 
-    <?php if(isset($_GET['getData'])){?>
+    <?php if(isset($_GET['color'])){?>
       <table class="table table-dark">
         <thead>
           <tr>

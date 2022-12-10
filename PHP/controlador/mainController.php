@@ -2,10 +2,10 @@
 class mainController{
 	public $color = 'green';
 
-	public function getData(){
+	public function getData($color){
 		$curl   = curl_init();
 		curl_setopt_array($curl, array(
-	      CURLOPT_URL => 'https://my-json-server.typicode.com/dp-danielortiz/dptest_jsonplaceholder/items',
+	      CURLOPT_URL => 'https://my-json-server.typicode.com/dp-danielortiz/dptest_jsonplaceholder/items?color=' . $color,
 	      CURLOPT_RETURNTRANSFER    => true,
 	      CURLOPT_CUSTOMREQUEST     => 'GET',
 	    ));
@@ -23,5 +23,11 @@ class mainController{
 	    return $response;
 	}
 	
+
+	public function setFile( $data ){
+		$archivo = fopen('Respuesta1.json', "w" );
+        fwrite( $archivo, $data);
+        fclose( $archivo );
+	}
 
 }
